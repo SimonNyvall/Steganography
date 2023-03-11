@@ -24,6 +24,8 @@ Thanks to Computerphile and Dr.Pound for the insperation for this small project!
 In there video they explain a diffrent approach to solve steganography with code. (A better version then mine) How you can nest a zip file into the image file instead of appending the zip file to the end og the image file.
 
 ## Examples
+<img width="305" alt="image" src="https://user-images.githubusercontent.com/50596493/224512183-5d5e0323-d8fc-4d3a-87ee-e8667dbc9224.png">
+
 The size to the left is the original file while the size to the right is the NEW file.
 The zip file is just appended onto the jpg image and is not neted into the jpg image.
 
