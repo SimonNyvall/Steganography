@@ -19,9 +19,21 @@ if (!(Test-Path -Path $ImagePath -PathType Leaf)) {
     return 1
 }
 
+function IsImageExtensionValid($Image) {
+    if ($Image.Extension -eq ".jpg") {
+        return $true
+    }
+
+    if ($Image.Extension -eq ".png") {
+        return $true
+    }
+
+    return $false
+}
+
 $ImageFile = Get-Item -Path $ImagePath
-if ($ImageFile.Extension -ne ".jpg") {
-    Write-Host "The image file is not of the type .jpg!"
+if (!IsImageExtensionValid($ImageFile)) {
+    Write-Host "The image file is not of the right format!"
     return 1
 }
 
