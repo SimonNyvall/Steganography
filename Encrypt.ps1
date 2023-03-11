@@ -4,7 +4,7 @@ param(
     [string]$OutputPath = (Get-Location).Path
 )
 
-if ($FilePath -eq "-h" || $FilePath -eq "-help") {
+if ($FilePath -eq "-h" -or $FilePath -eq "-help") {
     Write-Host "Arg1: File path, Arg2: Image path, Arg3: Output path"
     return 0
 }
@@ -43,7 +43,9 @@ Compress-Archive -Path $FilePath -DestinationPath ((Get-Location).Path + $ZipFil
 
 $ZipedFile = Get-Item -Path ((Get-Location).Path + $ZipFileName)
 
-Copy-Item /B $ImageFile.FullName+$ZipedFile.FullName ($OutputPath + "/Image2.jpg")
+$ZipedFileBytes = [System.IO.File]::ReadAllBytes($ZipedFile.FullName)
+
+Add-Content -Path $ImageFile.FullName -Value $ZipedFileBytes -Encoding Byte -NoNewline
 
 Remove-Item $ZipedFile.FullName
 
