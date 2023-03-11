@@ -32,16 +32,18 @@ function IsImageExtensionValid($Image) {
 }
 
 $ImageFile = Get-Item -Path $ImagePath
-if (!IsImageExtensionValid($ImageFile)) {
-    Write-Host "The image file is not of the right format!"
+if (!(IsImageExtensionValid($ImageFile))) {
+    Write-Host "The image file is not of the supported format!"
     return 1
 }
 
-Compress-Archive -Path $FilePath -DestinationPath ((Get-Location).Path + "/fileName")
+[string]$ZipFileName = "/ZipedFile.zip"
 
-$ZipedFile = Get-Item -Path ((Get-Location).Path + "/fileName.zip")
+Compress-Archive -Path $FilePath -DestinationPath ((Get-Location).Path + $ZipFileName)
 
-Copy-Item /B $ImageFile.Name+$ZipedFile.Name ($OutputPath + "/image2.jpg")
+$ZipedFile = Get-Item -Path ((Get-Location).Path + $ZipFileName)
+
+Copy-Item /B $ImageFile.FullName+$ZipedFile.FullName ($OutputPath + "/Image2.jpg")
 
 Remove-Item $ZipedFile.FullName
 
