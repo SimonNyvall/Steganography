@@ -1,11 +1,10 @@
 param(
     [string]$FilePath,
-    [string]$ImagePath,
-    [string]$OutputPath = (Get-Location).Path
+    [string]$ImagePath
 )
 
 if ($FilePath -eq "-h" -or $FilePath -eq "-help") {
-    Write-Host "Arg1: File path, Arg2: Image path, Arg3: Output path"
+    Write-Host "Arg1: File path, Arg2: Image path"
     return 0
 }
 
@@ -49,4 +48,4 @@ Add-Content -Path $ImageFile.FullName -Value $ZipedFileBytes -Encoding Byte -NoN
 
 Remove-Item $ZipedFile.FullName
 
-Write-Host "Succsessfully hid zip file in image!"
+Write-Host "Successfully hid zip file in image!"
